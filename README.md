@@ -9,16 +9,17 @@ This repository contains a Dockerized version of Apache Airflow running on Local
 
 ## How to Run
 
-Configure `.env`
+1) Configure `.env`
 
-```sh
-nano .env
-```
+   ```sh
+   nano .env
+   ```
+2) Locate your DAG files on `./dags` folder
 
-Build and run Docker container
+3) Build and run Docker container
 
-```sh
-docker-compose -f docker-compose-LocalExecutor.yml up -d
-```
+   ```sh
+   docker-compose -f docker-compose-LocalExecutor.yml up -d
+   ```
 
-Access Airflow UI on http://localhost:8080
+4) Access Airflow UI on http://localhost:8080
