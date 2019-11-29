@@ -2,21 +2,24 @@ version: '2.1'
 services:
     postgres:
         image: postgres:9.6
-        environment:
-            - POSTGRES_USER=airflow
-            - POSTGRES_PASSWORD=airflow
-            - POSTGRES_DB=airflow
+        env_file:
+            - .env
+        ports:
+            - "5432:5432"
 
     webserver:
-        image: puckel/docker-airflow:1.10.6
+        build: .
+        image: asatrya/docker-airflow:1.10.6
         restart: always
         depends_on:
             - postgres
-        environment:
-            - LOAD_EX=n
-            - EXECUTOR=Local
+        env_file:
+            - .env
+        environment: 
+            EXECUTOR: "LocalExecutor"
         volumes:
             - ./dags:/usr/local/airflow/dags
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             # Uncomment to include custom plugins
             # - ./plugins:/usr/local/airflow/plugins
         ports:
